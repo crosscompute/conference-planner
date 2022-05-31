@@ -10,4 +10,4 @@
 [X] Data_Frame to markdown
 
 ### 0.1.2
-[] Use CrossCompute Framewor
+[] Use CrossCompute Framework
