@@ -1,0 +1,17 @@
+---
+crosscompute: 0.9.2
+name: Conference Calendar
+version: 0.0.1
+
+output:
+  variables:
+    - id: calendar
+      view: table
+      path: calendar.csv
+
+      
+batches:
+  - folder: batches/a
+
+scripts:
+  - command: python3.9 run.py {output_folder}
