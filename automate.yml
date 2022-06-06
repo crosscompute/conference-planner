@@ -11,7 +11,7 @@ output:
 
       
 batches:
-  - folder: batches/a
+  - folder: batches/standard
 
 scripts:
   - command: python run.py {output_folder}
