@@ -1,0 +1,34 @@
+---
+crosscompute: 0.9.3
+name: Conference Calendar
+version: 0.0.1
+
+input:
+  variables:
+    - id: uri
+      view: string
+      path: variables.dictionary
+
+output:
+  variables:
+    - id: events
+      view: markdown
+      path: events.md
+
+batches:
+  - folder: batches/standard
+
+scripts:
+  - path: run.ipynb
+
+environment:
+  interval: 1 day
+
+display:
+  pages:
+    - id: automation
+      configuration:
+        design: output
+    - id: output
+      configuration:
+        design: none
