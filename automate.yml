@@ -2,7 +2,7 @@
 crosscompute: 0.9.3
 name: Conference Planner
 description: Track conference deadlines
-version: 0.0.1
+version: 0.1.0
 
 input:
   variables:
@@ -12,9 +12,9 @@ input:
 
 output:
   variables:
-    - id: events
+    - id: calendar
       view: markdown
-      path: events.md
+      path: calendar.md
 
 batches:
   - folder: batches/standard
