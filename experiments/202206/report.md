@@ -1,3 +1,0 @@
-# Conference Calendar
-
-{ calendar }
