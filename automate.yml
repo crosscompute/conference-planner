@@ -1,6 +1,7 @@
 ---
 crosscompute: 0.9.4
 name: Conference Planner
+slug: conference-planner
 description: Track conference deadlines
 version: 0.2.0
 input:
