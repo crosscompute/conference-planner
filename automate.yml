@@ -6,7 +6,10 @@ description: Track conference deadlines
 version: 0.2.0
 input:
   variables:
-    - id: uri
+    - id: page_title
+      view: string
+      path: variables.dictionary
+    - id: source_uri
       view: string
       path: variables.dictionary
 output:
