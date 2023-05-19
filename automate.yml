@@ -22,6 +22,9 @@ batches:
 scripts:
   - path: run.ipynb
 environment:
+  packages:
+    - id: pandas
+      manager: pip
   interval: 1 day
 display:
   pages:
