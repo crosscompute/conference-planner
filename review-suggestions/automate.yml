@@ -1,0 +1,20 @@
+---
+crosscompute: 0.9.4
+name: Review Conference Suggestions
+version: 0.0.1
+output:
+  variables:
+    - id: suggestions
+      view: text
+      path: suggestions.csv
+    - id: suggestions-link
+      view: link
+      path: suggestions.csv
+batches:
+  - folder: batches/standard
+datasets:
+  - path: datasets/runs
+    reference:
+      path: ../suggest-conference/runs
+scripts:
+  - path: run.py

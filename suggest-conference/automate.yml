@@ -1,9 +1,14 @@
 ---
 crosscompute: 0.9.4
 name: Suggest Conference
-version: 0.1.0
+description: Suggest a conference to include in your conference planner
+version: 0.0.1
 input:
   variables:
+    - id: website_url
+      view: string
+      path: variables.dictionary
+      label: Website URL
     - id: subject
       view: string
       path: variables.dictionary
@@ -11,19 +16,18 @@ input:
     - id: start_date
       view: string
       path: variables.dictionary
-      label: Start Date
+      label: Start Date YYYY-mm-dd
     - id: end_date
       view: string
       path: variables.dictionary
-      label: End Date
-    - id: website_url
+      label: End Date YYYY-mm-dd
+    - id: location
       view: string
       path: variables.dictionary
-      label: Website URL
     - id: talk_deadline
       view: string
       path: variables.dictionary
-      label: Talk Deadline
+      label: Talk Deadline YYYY-mm-dd
     - id: proposal_url
       view: string
       path: variables.dictionary
@@ -33,179 +37,3 @@ output:
     - path: output.md
 batches:
   - folder: batches/standard
-datasets:
-  # path specifies the location that your scripts should use to load the file;
-  # reference path specifies the location of your actual file;
-  # use reference paths to avoid changing the code in your scripts;
-  # for example, suppose you have a report that relies on a monthly dataset;
-  # use path to fix a location where your scripts can expect to find the file;
-  # use reference path to point to the latest version of your monthly dataset
-- path: datasets/abc.csv
-  reference:
-    path: datasets/abc-2022.csv
-
-# scripts contain code that turn input variables into output variables
-scripts:
-  # case 0:
-  # command runs in the automation folder;
-  # folder paths are passed as arguments
-- command: >
-    python run.py
-    {input_folder} {output_folder} {log_folder} {debug_folder}
-  # case 1:
-  # path is a python script that runs in the automation folder;
-  # folder paths are passed as environment variables
-- path: run.py
-  # case 2:
-  # path is a python script that runs in the specified folder;
-  # folder paths are passed as environment variables
-- path: run.py
-  folder: scripts
-  # case 3:
-  # path is a jupyter notebook that runs in the automation folder;
-  # folder paths are passed as environment variables
-- path: run.ipynb
-  # case 4:
-  # function is a python function that runs in the automation folder;
-  # folder paths are passed as function arguments
-- function: run.plot_all
-
-# environment configures how your scripts run
-environment:
-
-  # engine runs your scripts and can be either podman or unsafe;
-  # podman is a container engine (see https://podman.io);
-  # unsafe means that the scripts will run directly on your machine
-  engine: podman
-
-  # image is the container used to run your scripts when using podman engine
-  image: python
-
-  # packages are installed in the container when using podman engine
-  packages:
-    # id is the name of the package as defined in the package manager
-    # manager is the name of a package manager such as apt, dnf, npm, pip
-  - id: chromium
-    manager: apt
-
-  # ports expose server processes running in your scripts
-  ports:
-    # id should correspond to a log or debug variable id that uses frame view;
-    # number is the port on which your script server process is listening
-  - id: demo
-    number: 8888
-
-  # variables are environment variables needed by your scripts
-  variables:
-    # id is the environment variable to make available to your script
-  - id: GOOGLE_KEY
-
-  # batch concurrency defines how your batches run;
-  # batch thread runs each batch as a separate thread;
-  # batch process runs each batch as a separate process;
-  # batch single runs each batch one at a time
-  batch: process
-
-  # interval specifies how long to wait before running your scripts again;
-  # use this setting to have dashboards update themselves;
-  # add an exclamation point to ensure the scripts run even if nobody watches
-  interval: 30 minutes
-
-# display configures the overall look and feel of your automation
-display:
-
-  # styles customize how your templates look
-  styles:
-    # path specifies the location of a css file
-  - path: style.css
-    # uri specifies the uri of a css file
-  - uri: https://cdn.jsdelivr.net/npm/pygments-css@1.0.0/default.css
-
-  # templates override the core templates used to render the site
-  templates:
-    # id specifies the name of the template to override;
-    # path specifies the location of a jinja template
-  - id: base
-    path: base.html
-  - id: live
-    path: live.html
-  - id: root
-    path: root.html
-
-  # pages override the design of specific pages
-  pages:
-    # id specifies the name of the page to override;
-    # configuration sets the design of the page
-  - id: automation
-    configuration:
-        # design input puts the input template on the automation page
-      design: input
-  - id: automation
-    configuration:
-        # design output puts the output template on the automation page
-      design: output
-  - id: automation
-    configuration:
-        # design none only renders the list of batches on the automation page
-      design: none
-  - id: input
-    configuration:
-        # design none removes all variable labels and css
-      design: none
-  - id: output
-    configuration:
-        # design none removes all variable labels and css
-      design: none
-
-  # buttons override the design of specific buttons
-  buttons:
-    # id specifies the name of the button to override;
-    # configuration sets the design of the button
-  - id: run
-    configuration:
-      button-text: Apply
-
-# authorization restricts access to your automation
-authorization:
-  # tokens are api keys for your automation;
-  # each token defines an identity
-  tokens:
-    # path specifies the location of a yaml file;
-    # the file should have tokens as keys and configuration settings as values;
-    # abcd:
-    #   role_name: admin
-    #   town_name: Springfield
-    # bcde:
-    #   role_name: leader
-    #   town_name: Branson
-    # cdef:
-    #   role_name: member
-    #   town_name: Mansfield
-  - path: tokens.yml
-  # groups define permissions
-  groups:
-    # configuration settings define how a group matches an identity
-    # permission ids specify which privileges the identity can access
-  - configuration:
-      role_name: admin
-    permissions:
-    - id: add_token
-    - id: see_root
-    - id: see_automation
-    - id: see_batch
-    - id: run_automation
-    # note that the value for each configuration setting can also be a list;
-    # then an identity will match this group if its setting matches a value
-  - configuration:
-      role_name:
-      - leader
-      - member
-    permissions:
-    - id: see_root
-    - id: see_automation
-    - id: see_batch
-          # action match is specific to the permission see_batch;
-          # in the example above, suppose that a user uses the token cdef;
-          # then the user will have town_name Mansfield and
-          # can only see batches whose input variable town_name is Mansfield
-      action: match
