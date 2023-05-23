@@ -3,4 +3,4 @@ crosscompute: 0.9.4
 imports:
   - path: show-conferences/automate.yml
   - path: suggest-conference/automate.yml
-# - path: review-suggestions/automate.yml
+  - path: review-suggestions/automate.yml

@@ -33,7 +33,7 @@ authorization:
     - path: tokens.yml
   groups:
     - configuration:
-        role_name: superuser
+        role_name: reviewer
       permissions:
         - id: see_automation
         - id: see_batch
