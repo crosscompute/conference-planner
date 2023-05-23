@@ -1,1 +1,1 @@
-Thank you for suggesting a conference.
+Thank you for suggesting a conference. [Suggest another conference]({ ROOT_URI }/a/suggest-conference).
