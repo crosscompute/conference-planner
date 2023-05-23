@@ -22,12 +22,13 @@ dist/
 *.sqlite
 *.sqlite-journal
 # crosscompute
+.*.py
+.containerfile
+.containerignore
+.run.*
 batches/
 datasets/
 debug/
 runs/
 tests/
-.*.py
-.run.*
-.containerfile
-.containerignore
+tokens.yml
