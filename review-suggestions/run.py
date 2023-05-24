@@ -22,7 +22,7 @@ rows = []
 for run_folder in runs_folder.glob('*'):
     with (run_folder / 'input' / 'variables.dictionary').open('rt') as f:
         d = json.load(f)
-    rows.append(d.values())
+    rows.append(list(d.values()))
 
 
 with (output_folder / 'suggestions.md').open('wt') as f:
