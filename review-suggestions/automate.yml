@@ -5,8 +5,8 @@ version: 0.0.1
 output:
   variables:
     - id: suggestions
-      view: table
-      path: suggestions.json
+      view: markdown
+      path: suggestions.md
     - id: suggestions-link
       view: link
       path: suggestions.csv
@@ -20,14 +20,6 @@ datasets:
       path: ../suggest-conference/runs
 scripts:
   - path: run.py
-display:
-  pages:
-    - id: automation
-      configuration:
-        design: output
-    - id: output
-      configuration:
-        design: none
 authorization:
   tokens:
     - path: tokens.yml
@@ -37,3 +29,4 @@ authorization:
       permissions:
         - id: see_automation
         - id: see_batch
+        - id: run_automation

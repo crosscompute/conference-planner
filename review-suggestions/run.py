@@ -25,8 +25,22 @@ for run_folder in runs_folder.glob('*'):
     rows.append(d.values())
 
 
-with (output_folder / 'suggestions.json').open('wt') as f:
-    json.dump({'columns': columns, 'data': rows}, f)
+with (output_folder / 'suggestions.md').open('wt') as f:
+    lines = []
+    for r in rows:
+        [
+            website_url,
+            subject,
+            start_date,
+            end_date,
+            location,
+            talk_deadline,
+            proposal_url] = r
+        lines.append(
+            f'[{subject}]({website_url}) is from {start_date or "?"} to '
+            f'{end_date or "?"} in {location or "?"} with proposals due '
+            f'{talk_deadline or "?"}')
+    f.write('\n'.join(lines))
 
 
 with (output_folder / 'suggestions.csv').open('wt') as f:
