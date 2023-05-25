@@ -29,12 +29,12 @@ with (output_folder / 'suggestions.md').open('wt') as f:
     lines = []
     for r in sorted(rows, key=lambda _: _[2]):
         [
-            website_url,
             subject,
             start_date,
             end_date,
-            location,
             talk_deadline,
+            location,
+            website_url,
             proposal_url] = r
         lines.append(
             f'[{subject}]({website_url}) is from {start_date or "?"} to '
