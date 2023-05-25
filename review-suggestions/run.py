@@ -11,18 +11,18 @@ runs_folder = datasets_folder / 'runs'
 
 
 columns = [
-    'website_url',
-    'subject',
-    'start_date',
-    'end_date'
-    'location',
-    'talk_deadline',
-    'proposal_url']
+    'Subject',
+    'Start Date',
+    'End Date',
+    'Talk Deadline',
+    'Location',
+    'Website URL',
+    'Proposal URL']
 rows = []
 for run_folder in runs_folder.glob('*'):
     with (run_folder / 'input' / 'variables.dictionary').open('rt') as f:
         d = json.load(f)
-    rows.append(list(d.values()))
+    rows.append([d[_.lower().replace(' ', '_')] for _ in columns])
 
 
 with (output_folder / 'suggestions.md').open('wt') as f:
