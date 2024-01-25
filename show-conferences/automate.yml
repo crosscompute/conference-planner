@@ -17,7 +17,7 @@ output:
       view: markdown
       path: calendar.md
 batches:
-  - folder: batches/standard
+  - folder: batches/python
 scripts:
   - path: run.ipynb
 environment:
